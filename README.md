@@ -87,29 +87,15 @@ tail -f ~/Library/Logs/caffeine-that-keeps-you-active-on-teams-for-mac.log
 
 While toggled on, you want one `jiggle … moved=true` line every 30 seconds.
 
-## The TCC gotcha (read this)
+## The TCC gotcha
 
-This is the whole reason the predecessor's README also harped on this. It will bite you again.
+Symptom: `moved=false` in the log while the app is toggled on. The power assertion still works, but Teams flips you to Away because the cursor isn't actually moving.
 
-The binary is **ad-hoc signed** (no Developer ID — not paying Apple $99/yr for a desk utility). macOS's Transparency, Consent, and Control (TCC) system stores your Accessibility grant against the binary's `cdhash` (embedded in the code signature). **Every time you rebuild, the cdhash changes.**
+Cause: the binary is ad-hoc signed, and macOS pins Accessibility grants to the binary's `cdhash`. Every rebuild changes the cdhash, orphaning the grant. The TCC row still exists and System Settings still shows it enabled — but `CGEvent.post()` silently no-ops.
 
-The failure mode is silent and nasty:
+Fix: in System Settings → Privacy & Security → Accessibility, remove the app and re-add it, then `pkill -f 'caffeine-that-keeps-you-active-on-teams-for-mac'` so launchd respawns it under the fresh grant. `build.sh` prints the new cdhash after every rebuild as a reminder.
 
-- The row in `/Library/Application Support/com.apple.TCC/TCC.db` still exists.
-- The grant still shows up as ✓ enabled in System Settings.
-- `CGEvent(...)` creation still succeeds.
-- `CGEvent.post()` returns `Void` — no error, no log line.
-- But the events get silently dropped by the event tap because the binary's cdhash doesn't match the grant.
-
-You see: `moved=false` in the log (start, mid, end all identical). The power assertion side still works (because that doesn't go through TCC), so Caffeine-style keep-awake is fine — but Teams will still flip you to Away because the cursor isn't actually moving.
-
-**Fix**, in order of effort:
-
-1. **Re-grant after every rebuild.** Remove the app from Accessibility, re-add it, kill the process so launchd respawns under the fresh grant. `build.sh` prints the new cdhash and a reminder every time. This is the default.
-2. **Buy a Developer ID** ($99/year). Sign with a stable identity and the grant persists across rebuilds.
-3. **Disable SIP and modify `TCC.db` directly.** Not recommended.
-
-If you see `moved=false` in the log while the app is toggled on, it's always (1).
+Skip the dance permanently by signing with a Developer ID ($99/yr). Or disable SIP and edit `TCC.db` directly — not recommended.
 
 ## Files
 
