@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleName</key>
+  <string>Caffeine That Keeps You Active On Teams For Mac</string>
+  <key>CFBundleDisplayName</key>
+  <string>Caffeine That Keeps You Active On Teams For Mac</string>
+  <key>CFBundleIdentifier</key>
+  <string>com.kevin.caffeine-that-keeps-you-active-on-teams-for-mac</string>
+  <key>CFBundleExecutable</key>
+  <string>caffeine-that-keeps-you-active-on-teams-for-mac</string>
+  <key>CFBundleVersion</key>
+  <string>2.0</string>
+  <key>CFBundleShortVersionString</key>
+  <string>2.0</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>LSUIElement</key>
+  <true/>
+  <key>LSMinimumSystemVersion</key>
+  <string>11.0</string>
+  <key>NSHumanReadableCopyright</key>
+  <string>MIT licensed. Named for its problem.</string>
+</dict>
+</plist>

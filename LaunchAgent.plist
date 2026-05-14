@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.kevin.caffeine-that-keeps-you-active-on-teams-for-mac</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>__HOME__/Applications/Caffeine That Keeps You Active On Teams For Mac.app/Contents/MacOS/caffeine-that-keeps-you-active-on-teams-for-mac</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <dict>
+    <key>SuccessfulExit</key>
+    <false/>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>__HOME__/Library/Logs/caffeine-that-keeps-you-active-on-teams-for-mac.log</string>
+  <key>StandardErrorPath</key>
+  <string>__HOME__/Library/Logs/caffeine-that-keeps-you-active-on-teams-for-mac.err</string>
+  <key>ProcessType</key>
+  <string>Interactive</string>
+</dict>
+</plist>
